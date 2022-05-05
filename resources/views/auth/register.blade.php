@@ -20,6 +20,17 @@
             </div>
 
             <div class="mt-4">
+                <x-jet-label for="ign" value="{{ __('IGN') }}" />
+                <x-jet-input id="ign" class="block mt-1 w-full" type="text" name="ign" :value="old('ign')" required />
+            </div>
+
+            <div class="mt-4">
+                <x-jet-label for="discord" value="{{ __('Discord ID') }}" />
+                <small>ex: Yourname#1234</small>
+                <x-jet-input id="discord" class="block mt-1 w-full" type="text" name="discord" :value="old('discord')" required />
+            </div>
+
+            <div class="mt-4">
                 <x-jet-label for="password" value="{{ __('Password') }}" />
                 <x-jet-input id="password" class="block mt-1 w-full" type="password" name="password" required autocomplete="new-password" />
             </div>

@@ -1,5 +1,12 @@
 <?php
 
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\CategoryDetailController;
+use App\Http\Controllers\CategoryTypeController;
+use App\Http\Controllers\ClassJobController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ProductGalleryController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,12 +24,40 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::middleware([
-    'auth:sanctum',
-    config('jetstream.auth_session'),
-    'verified'
-])->group(function () {
-    Route::get('/dashboard', function () {
-        return view('dashboard');
-    })->name('dashboard');
+//route login dashboard
+Route::middleware(['auth:sanctum', 'verified'])->name('dashboard.')->prefix('dashboard')->group(function (){
+    Route::get('/', [DashboardController::class, 'index'])->name('index');
+
+    //route admin
+    Route::middleware(['admin'])->group(function(){
+        Route::resource('product', ProductController::class);
+        Route::resource('product.gallery', ProductGalleryController::class)->shallow()->only([
+            'index', 'create', 'store', 'destroy'
+        ]);
+        Route::resource('class-job', ClassJobController::class)->except([
+            'show'
+        ]);
+        Route::resource('category', CategoryController::class)->except([
+            'show'
+        ]);
+        Route::resource('category-detail', CategoryDetailController::class)->except([
+            'show'
+        ]);
+        Route::resource('category-type', CategoryTypeController::class)->except([
+            'show'
+        ]);
+        // Route::resource('inbox', ContactController::class)->only([
+        //     'show', 'index'
+        // ]);
+    });
 });
+
+// Route::middleware([
+//     'auth:sanctum',
+//     config('jetstream.auth_session'),
+//     'verified'
+// ])->group(function () {
+//     Route::get('/dashboard', function () {
+//         return view('dashboard');
+//     })->name('dashboard');
+// });
