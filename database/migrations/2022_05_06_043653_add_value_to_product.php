@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::table('products', function (Blueprint $table) {
-            $table->integer('job_id')->after('category_type_id')->nullable();
+            $table->integer('value')->nullable()->after('rc');
         });
     }
 
@@ -26,7 +26,7 @@ return new class extends Migration
     public function down()
     {
         Schema::table('products', function (Blueprint $table) {
-            $table->dropColumn('job_id');
+            $table->dropColumn('value');
         });
     }
 };

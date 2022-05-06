@@ -3,7 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
+use App\Models\Category;
+use App\Models\ClassJob;
+use Illuminate\Support\Str;
+use App\Models\CategoryType;
 use Illuminate\Http\Request;
+use App\Models\CategoryDetail;
+use App\Http\Requests\ProductRequest;
+use Illuminate\Support\Facades\Auth;
 
 class ProductController extends Controller
 {
@@ -24,7 +31,12 @@ class ProductController extends Controller
      */
     public function create()
     {
-        //
+        return view('backend.product.create')->with([
+            'categories'    => Category::select('id', 'name')->get(),
+            'details'       => CategoryDetail::select('id', 'name')->get(),
+            'types'         => CategoryType::select('id', 'name')->get(),
+            'classes'       => ClassJob::whereNotNull('parent_id')->select('id', 'name')->get()
+        ]);
     }
 
     /**
@@ -33,9 +45,15 @@ class ProductController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ProductRequest $request)
     {
-        //
+        $data = $request->validated();
+        $data['slug'] = Str::slug($data['name']);
+        $data['user_id'] = Auth::user()->id;
+
+        Product::create($data);
+
+        return redirect()->route('dashboard.index');
     }
 
     /**
@@ -57,7 +75,13 @@ class ProductController extends Controller
      */
     public function edit(Product $product)
     {
-        //
+        return view('backend.product.edit', [
+            'item'          => $product,
+            'categories'    => Category::select('id', 'name')->get(),
+            'details'       => CategoryDetail::select('id', 'name')->get(),
+            'types'         => CategoryType::select('id', 'name')->get(),
+            'classes'       => ClassJob::whereNotNull('parent_id')->select('id', 'name')->get()
+        ]);
     }
 
     /**
@@ -69,7 +93,11 @@ class ProductController extends Controller
      */
     public function update(Request $request, Product $product)
     {
-        //
+        $data = $request->all();
+
+        $product->update($data);
+
+        return redirect()->route('dashboard.index');
     }
 
     /**
@@ -80,6 +108,8 @@ class ProductController extends Controller
      */
     public function destroy(Product $product)
     {
-        //
+        $product->delete();
+
+        return redirect()->route('dashboard.index');
     }
 }

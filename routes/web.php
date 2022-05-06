@@ -27,13 +27,14 @@ Route::get('/', function () {
 //route login dashboard
 Route::middleware(['auth:sanctum', 'verified'])->name('dashboard.')->prefix('dashboard')->group(function (){
     Route::get('/', [DashboardController::class, 'index'])->name('index');
+    Route::resource('product', ProductController::class);
+    Route::resource('product.gallery', ProductGalleryController::class)->shallow()->only([
+        'index', 'create', 'store', 'destroy'
+    ]);
 
     //route admin
     Route::middleware(['admin'])->group(function(){
-        Route::resource('product', ProductController::class);
-        Route::resource('product.gallery', ProductGalleryController::class)->shallow()->only([
-            'index', 'create', 'store', 'destroy'
-        ]);
+
         Route::resource('class-job', ClassJobController::class)->except([
             'show'
         ]);
