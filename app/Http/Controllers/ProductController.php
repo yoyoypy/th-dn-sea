@@ -108,7 +108,9 @@ class ProductController extends Controller
      */
     public function destroy(Product $product)
     {
-        $product->delete();
+        if(Auth::user()->role = 'ADMIN') {
+            $product->delete();
+        }
 
         return redirect()->route('dashboard.index');
     }

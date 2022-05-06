@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Yajra\DataTables\DataTables;
 
 class DashboardController extends Controller
@@ -12,7 +13,7 @@ class DashboardController extends Controller
     {
         if (request()->ajax())
         {
-            $query = Product::query()->with('job', 'category', 'detail', 'type');
+            $query = Product::query()->where('user_id', Auth::user()->id)->with('job', 'category', 'detail', 'type');
 
             return DataTables::of($query)
                 ->editColumn('category_id', function($item){
@@ -39,13 +40,7 @@ class DashboardController extends Controller
                         <a class="inline-block border border-gray-700 bg-gray-700 text-white rounded-md px-2 py-1 m-1 transition duration-500 ease select-none hover:bg-gray-800 focus:outline-none focus:shadow-outline"
                         href="' . route('dashboard.product.edit', $item->slug) . '">
                             Edit
-                        </a>
-                        <form class="inline-block" action="' . route('dashboard.product.destroy', $item->slug) . '" method="POST">
-                        <button class="border border-red-500 bg-red-500 text-white rounded-md px-2 py-1 m-2 transition duration-500 ease select-none hover:bg-red-600 focus:outline-none focus:shadow-outline" >
-                            Hapus
-                        </button>
-                            ' . method_field('delete') . csrf_field() . '
-                        </form>';
+                        </a>';
                 })
                 ->rawColumns(['action'])
                 ->make();
@@ -54,3 +49,10 @@ class DashboardController extends Controller
         return view('backend.dashboard');
     }
 }
+
+// <form class="inline-block" action="' . route('dashboard.product.destroy', $item->slug) . '" method="POST">
+//                         <button class="border border-red-500 bg-red-500 text-white rounded-md px-2 py-1 m-2 transition duration-500 ease select-none hover:bg-red-600 focus:outline-none focus:shadow-outline" >
+//                             Hapus
+//                         </button>
+//                             ' . method_field('delete') . csrf_field() . '
+//                         </form>
