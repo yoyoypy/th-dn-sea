@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            Category &raquo; Create
+            Category Type &raquo; Create
         </h2>
     </x-slot>
 
@@ -25,8 +25,22 @@
                </div>
                @endif
             {{-- form start --}}
-            <form action="{{ route('dashboard.category.store') }}" class="w-full" method="POST" enctype="multipart/form-data">
+            <form action="{{ route('dashboard.category-type.store') }}" class="w-full" method="POST" enctype="multipart/form-data">
                 @csrf
+                <div class="flex flex-wrap -mx-4 mb-6">
+                    {{-- input brand --}}
+                    <div class="w-full px-3">
+                        <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">Category</label>
+                        <select name="category_id" id="category_id" class="block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500">
+                            <option value="">Select a Category</option>
+                            <option value="" disabled>------------------</option>
+                            @foreach ($categories as $category)
+                            <option value="{{ $category->id }}">{{ $category->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    {{-- input brand --}}
+                </div>
                 <div class="flex flex-wrap -mx-4 mb-6">
                     {{-- input brand --}}
                     <div class="w-full px-3">
@@ -39,7 +53,7 @@
                     {{-- save button --}}
                     <div class="w-full px-3">
                         <button type="submit" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded shadow-lg">
-                            Save Category
+                            Save Category Type
                         </button>
                     </div>
                     {{-- save button --}}

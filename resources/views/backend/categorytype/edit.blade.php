@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            Category &raquo; {{ $item->name }} &raquo; Edit
+            Category Type &raquo; {{ $item->name }} &raquo; Edit
         </h2>
     </x-slot>
 
@@ -25,13 +25,27 @@
                </div>
                @endif
             {{-- form start --}}
-            <form action="{{ route('dashboard.category.update', $item->slug) }}" class="w-full" method="POST" enctype="multipart/form-data">
+            <form action="{{ route('dashboard.category-type.update', $item->id) }}" class="w-full" method="POST" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
                 <div class="flex flex-wrap -mx-4 mb-6">
-                    {{-- input category --}}
+                    {{-- input brand --}}
                     <div class="w-full px-3">
                         <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">Category</label>
+                        <select name="category_id" id="category_id" class="block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500">
+                            <option value="{{ $item->category->id }}">{{ $item->category->name }}</option>
+                            <option value="" disabled>------------------</option>
+                            @foreach ($categories as $category)
+                            <option value="{{ $category->id }}">{{ $category->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    {{-- input brand --}}
+                </div>
+                <div class="flex flex-wrap -mx-4 mb-6">
+                    {{-- input category --}}
+                    <div class="w-full px-3">
+                        <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">Category Type</label>
                         <input type="text" required value="{{ old('name') ?? $item->name }}" name="name" placeholder="Input Category Name Here" class="block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500">
                     </div>
                     {{-- input category --}}
@@ -41,7 +55,7 @@
                     {{-- save button --}}
                     <div class="w-full px-3">
                         <button type="submit" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded shadow-lg">
-                            Update Category
+                            Update Category Type
                         </button>
                     </div>
                     {{-- save button --}}

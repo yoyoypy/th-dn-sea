@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('category_types', function (Blueprint $table) {
             $table->id();
-            $table->integer('category_detail_id')->nullable()->references('id')->on('category_details')->onDelete('cascade');
+            $table->integer('category_id')->nullable()->references('id')->on('categories')->onDelete('cascade');
             $table->string('name');
             $table->timestamps();
         });

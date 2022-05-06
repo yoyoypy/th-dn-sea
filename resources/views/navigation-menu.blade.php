@@ -23,11 +23,11 @@
                     <x-jet-nav-link href="{{ route('dashboard.category.index') }}" :active="request()->routeIs('dashboard.category.index')">
                         {{ __('Category') }}
                     </x-jet-nav-link>
-                    <x-jet-nav-link href="{{ route('dashboard.category-detail.index') }}" :active="request()->routeIs('dashboard.category-detail.index')">
-                        {{ __('Category Detail') }}
-                    </x-jet-nav-link>
                     <x-jet-nav-link href="{{ route('dashboard.category-type.index') }}" :active="request()->routeIs('dashboard.category-type.index')">
                         {{ __('Category Type') }}
+                    </x-jet-nav-link>
+                    <x-jet-nav-link href="{{ route('dashboard.category-detail.index') }}" :active="request()->routeIs('dashboard.category-detail.index')">
+                        {{ __('Category Detail') }}
                     </x-jet-nav-link>
                     @endif
                 </div>

@@ -10,7 +10,7 @@ class CategoryType extends Model
     use HasFactory;
 
     protected $fillable = [
-        'category_detail_id',
+        'category_id',
         'name'
     ];
 
@@ -18,4 +18,14 @@ class CategoryType extends Model
         'created_at',
         'udpated_at'
     ];
+
+    /**
+     * Get the category that owns the CategoryType
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function category()
+    {
+        return $this->belongsTo(Category::class, 'category_id', 'id');
+    }
 }
