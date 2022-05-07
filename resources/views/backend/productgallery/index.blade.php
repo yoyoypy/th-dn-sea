@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Category Details') }}
+            Product &raquo; {{ $product->name }} &raquo; Gallery
         </h2>
     </x-slot>
 
@@ -14,9 +14,7 @@
                 },
                 columns: [
                     { data: 'id', name: 'id', width: '5%'},
-                    { data: 'jobclass', name: 'jobclass' },
-                    { data: 'category', name: 'category' },
-                    { data: 'name', name: 'name' },
+                    { data: 'url', name: 'url' },
                     {
                         data: 'action',
                         name: 'action',
@@ -32,8 +30,11 @@
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="mb-10">
-                <a href="{{ route('dashboard.category-detail.create') }}" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded shadow-lg">
-                    + Create Category Detail
+                <a href="{{ route('dashboard.product.gallery.create', $product->slug) }}" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded shadow-lg">
+                    + Upload Photos for {{ $product->name }}
+                </a>
+                <a href="{{ route('dashboard.index') }}" class="bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded shadow-lg" style="margin-left: 3px">
+                    Back to product
                 </a>
             </div>
             <div class="shadow overflow-hidden sm:rounded-md">
@@ -42,9 +43,7 @@
                         <thead>
                         <tr>
                             <th>ID</th>
-                            <th>Job</th>
-                            <th>Category</th>
-                            <th>Category Detail</th>
+                            <th>Photo</th>
                             <th>Action</th>
                         </tr>
                         </thead>

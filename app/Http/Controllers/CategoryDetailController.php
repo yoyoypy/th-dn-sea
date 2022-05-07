@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\CategoryDetailRequest;
 use App\Models\Category;
 use App\Models\CategoryDetail;
+use App\Models\ClassJob;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
 
@@ -55,10 +56,9 @@ class CategoryDetailController extends Controller
      */
     public function create()
     {
-        $categories = Category::all();
-
         return view('backend.categorydetail.create')->with([
-            'categories' => $categories
+            'categories' => Category::all(),
+            'jobs'  => ClassJob::all()
         ]);
     }
 

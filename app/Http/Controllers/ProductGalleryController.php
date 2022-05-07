@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\ProductGallery;
+use App\Http\Requests\ProductGalleryRequest;
+use App\Models\Product;
 use Illuminate\Http\Request;
+use App\Models\ProductGallery;
+use Yajra\DataTables\DataTables;
+use Illuminate\Support\Facades\Storage;
 
 class ProductGalleryController extends Controller
 {
@@ -12,9 +16,30 @@ class ProductGalleryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Product $product)
     {
-        //
+        if (request()->ajax())
+        {
+            $query = ProductGallery::where('products_id', $product->id);
+
+            return DataTables::of($query)
+                ->addColumn('action', function($item){
+                    return '
+                        <form class="inline-block" action="' . route('dashboard.gallery.destroy', $item->id) . '" method="POST">
+                        <button class="border border-red-500 bg-red-500 text-white rounded-md px-2 py-1 m-2 transition duration-500 ease select-none hover:bg-red-600 focus:outline-none focus:shadow-outline" >
+                            Hapus
+                        </button>
+                            ' . method_field('delete') . csrf_field() . '
+                        </form>';
+                })
+                ->editColumn('url', function($item){
+                    return '<img style="max-width: 150px" src="' . Storage::url($item->url) . '"/>';
+                })
+                ->rawColumns(['action','url'])
+                ->make();
+        }
+
+        return view('backend.productgallery.index', compact('product'));
     }
 
     /**
@@ -22,9 +47,9 @@ class ProductGalleryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Product $product)
     {
-        //
+        return view('backend.productgallery.create', compact('product'));
     }
 
     /**
@@ -33,9 +58,23 @@ class ProductGalleryController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ProductGalleryRequest $request, Product $product)
     {
-        //
+        $files = $request->file('files');
+
+        if($request->hasFile('files'))
+        {
+            foreach ($files as $file){
+                $path = $file->store('public/gallery');
+
+                ProductGallery::create([
+                    'products_id' => $product->id,
+                    'url' => $path
+                ]);
+            }
+        }
+
+        return redirect()->route('dashboard.product.gallery.index', $product->slug);
     }
 
     /**
@@ -78,8 +117,10 @@ class ProductGalleryController extends Controller
      * @param  \App\Models\ProductGallery  $productGallery
      * @return \Illuminate\Http\Response
      */
-    public function destroy(ProductGallery $productGallery)
+    public function destroy(ProductGallery $gallery)
     {
-        //
+        $gallery->delete();
+
+        return back();
     }
 }

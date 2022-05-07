@@ -11,6 +11,7 @@ class CategoryDetail extends Model
 
     protected $fillable = [
         'category_id',
+        'job_id',
         'name'
     ];
 

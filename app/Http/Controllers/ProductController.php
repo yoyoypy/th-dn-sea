@@ -114,4 +114,18 @@ class ProductController extends Controller
 
         return redirect()->route('dashboard.index');
     }
+
+    /**
+     * Mark product sold.
+     *
+     * @param  \App\Models\Product  $product
+     * @return \Illuminate\Http\Response
+     */
+    public function mark_sold(Product $product)
+    {
+        $product->is_sold = true;
+        $product->save();
+
+        return redirect()->route('dashboard.index');
+    }
 }

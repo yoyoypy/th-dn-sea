@@ -28,9 +28,11 @@ Route::get('/', function () {
 Route::middleware(['auth:sanctum', 'verified'])->name('dashboard.')->prefix('dashboard')->group(function (){
     Route::get('/', [DashboardController::class, 'index'])->name('index');
     Route::resource('product', ProductController::class);
-    Route::resource('product.gallery', ProductGalleryController::class)->shallow()->only([
+    Route::resource('product.gallery', ProductGalleryController::class)->only([
         'index', 'create', 'store', 'destroy'
-    ]);
+    ])->shallow();
+    Route::post('product/mark-sold/{product}', [ProductController::class, 'mark_sold'])->name('mark-sold');
+
 
     //route admin
     Route::middleware(['admin'])->group(function(){

@@ -21,6 +21,7 @@
                     { data: 'rc', name: 'rc' },
                     { data: 'value', name: 'value' },
                     { data: 'name', name: 'name' },
+                    { data: 'is_sold', name: 'is_sold' },
                     {
                         data: 'action',
                         name: 'action',
@@ -53,6 +54,7 @@
                             <th>Reseal Count</th>
                             <th>Value</th>
                             <th>Item Name</th>
+                            <th>Item Sold</th>
                             <th>Action</th>
                         </tr>
                         </thead>
