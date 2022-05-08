@@ -5,6 +5,7 @@ use App\Http\Controllers\CategoryDetailController;
 use App\Http\Controllers\CategoryTypeController;
 use App\Http\Controllers\ClassJobController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\FrontendController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProductGalleryController;
 use Illuminate\Support\Facades\Route;
@@ -20,9 +21,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+
+Route::get('/', [FrontendController::class, 'index'])->name('home');
+Route::get('/product/{product}', [FrontendController::class, 'product'])->name('product');
+Route::get('/category/{category}', [FrontendController::class, 'category'])->name('category');
+
 
 //route login dashboard
 Route::middleware(['auth:sanctum', 'verified'])->name('dashboard.')->prefix('dashboard')->group(function (){
