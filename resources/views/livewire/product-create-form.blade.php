@@ -19,6 +19,21 @@
             {{-- input brand --}}
             <div class="w-full px-3">
                 <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">Item Class*</label>
+                <select wire:model="selectedBaseClass" class="block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500">
+                    <option value="">Select a Base Class</option>
+                    <option value="" disabled>------------------</option>
+                    @foreach ($base_classes as $c)
+                    <option value="{{ $c->id }}">{{ $c->name }}</option>
+                    @endforeach
+                </select>
+            </div>
+            {{-- input brand --}}
+        </div>
+        @if (!is_null($classes))
+        <div class="flex flex-wrap -mx-4 mb-6">
+            {{-- input brand --}}
+            <div class="w-full px-3">
+                <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">Item Class*</label>
                 <select wire:model="selectedClass" name="job_id" id="job_id" class="block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500">
                     <option value="">Select a Class</option>
                     <option value="" disabled>------------------</option>
@@ -29,6 +44,7 @@
             </div>
             {{-- input brand --}}
         </div>
+        @endif
         @if (!is_null($categoryDetail))
         <div class="flex flex-wrap -mx-4 mb-6">
             {{-- input brand --}}

@@ -28,50 +28,7 @@
         <div class="row">
             {{-- Content--}}
             <div class="content col-lg-9">
-                <form action="{{ route('search') }}" method="GET">
-                    <div class="row m-b-20">
-                        <div class="col-lg-3">
-                            <div class="order-select">
-                                <h6>Sort by</h6>
-                                <p>Category</p>
-                                <select class="form-control" name="category_id" id="category_id">
-                                    <option value="">Select Category</option>
-                                    <option value="" disabled>--------------</option>
-                                    @foreach ($product_categories as $category)
-                                    <option value="{{ $category->id }}">{{ $category->name }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-lg-3">
-                            <div class="order-select">
-                                <h6>Sort by Class</h6>
-                                <p>Class</p>
-                                <select class="form-control" name="job_id" id="job_id">
-                                    <option value="">Select Class</option>
-                                    <option value="" disabled>--------------</option>
-                                    @foreach ($classes as $class)
-                                    <option value="{{ $class->id }}">{{ $class->name }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-lg-3">
-                            <div class="order-select">
-                                <h6>Find By Name</h6>
-                                <p>Item Name</p>
-                                <input type="text" class="form-control" name="name" id="name" placeholder="Input Item Name">
-                            </div>
-                        </div>
-                        <div class="col-lg-3">
-                            <div class="order-select">
-                                <button type="submit" class="btn btn-primary btn-sm" style="margin-top: 40%">
-                                    Find Item
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </form>
+                @livewire('frontend-search-form')
                 {{--Product list--}}
                 <div class="shop">
                     <div class="grid-layout grid-3-columns" data-item="grid-item">

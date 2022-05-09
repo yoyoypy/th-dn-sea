@@ -1,7 +1,7 @@
 <x-guest-layout>
     <x-jet-authentication-card>
         <x-slot name="logo">
-            <x-jet-authentication-card-logo />
+           <img src="{{ asset('frontend/images/logo.png') }}" alt="">
         </x-slot>
 
         <x-jet-validation-errors class="mb-4" />
@@ -65,6 +65,10 @@
                 <x-jet-button class="ml-4">
                     {{ __('Register') }}
                 </x-jet-button>
+            </div>
+
+            <div class="flex items-center justify-end mt-4">
+               <small>*)Your account information is safe, but as a reminder <strong>please dont use same info</strong> for registration of your Dragon Nest Sea Account. And We never ask your login credential / your Dragon Nest Sea account information.</small>
             </div>
         </form>
     </x-jet-authentication-card>

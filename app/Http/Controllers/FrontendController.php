@@ -12,7 +12,7 @@ class FrontendController extends Controller
     public function index()
     {
         $products = Product::with('galleries', 'user_product', 'detail', 'job', 'type', 'category')
-        ->latest()->paginate();
+        ->latest()->paginate(20);
 
         $product_categories = Category::withCount('product')->get();
         $classes = ClassJob::select('id', 'name')->whereNotNull('parent_id')->get();
@@ -46,7 +46,7 @@ class FrontendController extends Controller
             $query->where('name', 'LIKE', '%'.$name.'%');
         }
 
-        $products = $query->latest()->paginate();
+        $products = $query->latest()->paginate(20);
         $product_categories = Category::withCount('product')->get();
         $classes = ClassJob::select('id', 'name')->whereNotNull('parent_id')->get();
         $latest_products = Product::with('galleries', 'user_product', 'detail', 'job', 'type', 'category')->where('is_sold', false)->latest()->take(5)->get();
