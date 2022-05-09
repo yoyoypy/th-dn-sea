@@ -26,6 +26,7 @@ use Illuminate\Support\Facades\Route;
 // });
 
 Route::get('/', [FrontendController::class, 'index'])->name('home');
+Route::get('/search', [FrontendController::class, 'search'])->name('search');
 Route::get('/product/{product}', [FrontendController::class, 'product'])->name('product');
 Route::get('/category/{category}', [FrontendController::class, 'category'])->name('category');
 

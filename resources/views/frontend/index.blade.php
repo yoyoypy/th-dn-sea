@@ -28,38 +28,50 @@
         <div class="row">
             {{-- Content--}}
             <div class="content col-lg-9">
-                <div class="row m-b-20">
-                    <div class="col-lg-3">
-                        <div class="order-select">
-                            <h6>Sort by</h6>
-                            <p>Showing 1&ndash;12 of 25 results</p>
-                            <form method="get">
-                                <select class="form-control">
-                                    <option selected="selected" value="order">Default sorting</option>
-                                    <option value="popularity">Sort by popularity</option>
-                                    <option value="rating">Sort by average rating</option>
-                                    <option value="date">Sort by newness</option>
-                                    <option value="price">Sort by price: low to high</option>
-                                    <option value="price-desc">Sort by price: high to low</option>
+                <form action="{{ route('search') }}" method="GET">
+                    <div class="row m-b-20">
+                        <div class="col-lg-3">
+                            <div class="order-select">
+                                <h6>Sort by</h6>
+                                <p>Category</p>
+                                <select class="form-control" name="category_id" id="category_id">
+                                    <option value="">Select Category</option>
+                                    <option value="" disabled>--------------</option>
+                                    @foreach ($product_categories as $category)
+                                    <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                    @endforeach
                                 </select>
-                            </form>
+                            </div>
+                        </div>
+                        <div class="col-lg-3">
+                            <div class="order-select">
+                                <h6>Sort by Class</h6>
+                                <p>Class</p>
+                                <select class="form-control" name="job_id" id="job_id">
+                                    <option value="">Select Class</option>
+                                    <option value="" disabled>--------------</option>
+                                    @foreach ($classes as $class)
+                                    <option value="{{ $class->id }}">{{ $class->name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-lg-3">
+                            <div class="order-select">
+                                <h6>Find By Name</h6>
+                                <p>Item Name</p>
+                                <input type="text" class="form-control" name="name" id="name" placeholder="Input Item Name">
+                            </div>
+                        </div>
+                        <div class="col-lg-3">
+                            <div class="order-select">
+                                <button type="submit" class="btn btn-primary btn-sm" style="margin-top: 40%">
+                                    Find Item
+                                </button>
+                            </div>
                         </div>
                     </div>
-                    <div class="col-lg-3">
-                        <div class="order-select">
-                            <h6>Sort by Price</h6>
-                            <p>From 0 - 190$</p>
-                            <form method="get">
-                                <select class="form-control">
-                                    <option selected="selected" value="">0$ - 50$</option>
-                                    <option value="">51$ - 90$</option>
-                                    <option value="">91$ - 120$</option>
-                                    <option value="">121$ - 200$</option>
-                                </select>
-                            </form>
-                        </div>
-                    </div>
-                </div>
+                </form>
                 {{--Product list--}}
                 <div class="shop">
                     <div class="grid-layout grid-3-columns" data-item="grid-item">
