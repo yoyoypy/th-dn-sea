@@ -35,17 +35,18 @@
                                 </div>
                                 @if ($product->is_sold == false)
                                     <div class="product-price"><ins>{{ number_format($product->price) }} Gold</ins>
-                                    </div>
+                                    </div><br>
                                 @else
                                     <span class="badge badge-pill badge-danger">SOLD</span>
                                     <div class="product-price"><ins><strike>{{ number_format($product->price) }}</strike> Gold</ins>
-                                    </div>
+                                    </div><br>
                                 @endif
+                                <div class="product-category">Added {{ $product->created_at->diffForHumans() }}</div>
                                 <div class="seperator m-b-10"></div>
                                     <div class="product-title">
+                                        <h2>Seller Info</h2>
                                         IGN : <h3>{{ $product->user_product->ign }}</h3><br>
                                         Discord ID : <h3>{{ $product->user_product->discord }}</h3>
-                                        {{-- <h3>IGN : {{ $product->user_product->ign }}</h3> --}}
                                     </div>
                                 <div class="seperator m-b-10"></div>
                                     {!! Str::limit($product->description, 500) !!}
@@ -60,7 +61,7 @@
                                 <a class="nav-link active show" id="home-tab" data-toggle="tab" href="#home3" role="tab" aria-controls="home" aria-selected="false"><i class="fa fa-align-justify"></i>Description</a></a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile3" role="tab" aria-controls="profile" aria-selected="true"><i class="fa fa-info"></i>Additional Info</a></a>
+                                <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile3" role="tab" aria-controls="profile" aria-selected="true"><i class="fa fa-info"></i>Item Info</a></a>
                             </li>
                         </ul>
                         <div class="tab-content" id="myTabContent3">
@@ -94,64 +95,68 @@
                     {{-- end: Product additional tabs --}}
                 </div>
                 <div class="heading-text heading-line text-center">
-                    <h4>Related Products you may be interested!</h4>
+                    <h4>You may be also search for this item!</h4>
                 </div>
-                {{-- <div class="row">
+                <div class="row">
                     @foreach ($recommendations as $recommend)
                     <div class="col-lg-4">
                         <div class="widget-shop">
                             <div class="product">
                                 <div class="product-image">
-                                    <a href="{{ route('details', $recommend->slug) }}"><img src="{{ $recommend->picture()->exists() ? Storage::url($recommend->picture->url) : '' }}" alt="Shop product image!">
+                                    <a href="{{ route('product', $recommend->slug) }}"><img src="{{ $recommend->galleries()->exists() ? Storage::url($recommend->galleries->first()->url) : 'data:image/gif;base64,R0lGODlhAQABAIAAAMLCwgAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==' }}" alt="Shop product image!">
                                     </a>
                                 </div>
                                 <div class="product-description">
-                                    <div class="product-category">{{ $recommend->categories->category }}</div>
+                                    <div class="product-category">{{ $recommend->job->name }}</div>
+                                    <div class="product-category">{{ $product->detail->name }}</div>
+                                    <div class="product-category">{{ $product->type->name }}</div><br>
                                     <div class="product-title">
-                                        <h3><a href="{{ route('details', $recommend->slug) }}">{{ $recommend->name }}</a></h3>
+                                        <h3><a href="{{ route('product', $recommend->slug) }}">{{ $recommend->name }}</a></h3>
                                     </div>
-                                    <div class="product-price" style="width: 100%">Rp {{ number_format($recommend->price) }}
+                                    <div class="product-price" style="width: 100%">{{ number_format($recommend->price) }} Gold
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                     @endforeach
-                </div> --}}
+                </div>
             </div>
             {{-- end: Content--}}
             {{-- Sidebar--}}
             <div class="sidebar col-lg-3">
                 {{--widget newsletter--}}
-                {{-- <div class="widget clearfix widget-archive">
-                    <h4 class="widget-title">Product categories</h4>
+                <div class="widget clearfix widget-archive">
+                    <h4 class="widget-title">Item categories</h4>
                     <ul class="list list-lines">
-                        @foreach ($product_categories as $categories)
+                        @foreach ($product_categories as $category)
                             <li>
-                                <a href="#">{{ $categories->category }}</a> <span class="count">({{ $categories->product_count }})</span>
+                                <a href="#">{{ $category->name }}</a> <span class="count">({{ $category->product_count }})</span>
                             </li>
                         @endforeach
                     </ul>
-                </div> --}}
-                {{-- <div class="widget clearfix widget-shop">
-                    <h4 class="widget-title">Latest Products</h4>
+                </div>
+                <div class="widget clearfix widget-shop">
+                    <h4 class="widget-title">Latest Item Added</h4>
                     @foreach ($latest_products as $product)
                         <div class="product">
                             <div class="product-image">
-                                <a href="{{ route('details', $product->slug) }}"><img src="{{ $product->picture()->exists() ? Storage::url($product->picture->url) : '' }}" alt="Shop product image!">
+                                <a href="{{ route('product', $product->slug) }}"><img src="{{ $product->galleries()->exists() ? Storage::url($product->galleries->first()->url) : 'data:image/gif;base64,R0lGODlhAQABAIAAAMLCwgAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==' }}" alt="Shop product image!">
                                 </a>
                             </div>
                             <div class="product-description">
-                                <div class="product-category">{{ $product->categories->category }}</div>
+                                <div class="product-category">{{ $product->job->name }}</div>
+                                <div class="product-category">{{ $product->detail->name }}</div>
+                                <div class="product-category">{{ $product->type->name }}</div><br>
                                 <div class="product-title">
-                                    <h3><a href="{{ route('details', $product->slug) }}">{{ $product->name }}</a></h3>
+                                    <h3><a href="{{ route('product', $product->slug) }}">{{ $product->name }}</a></h3>
                                 </div>
-                                <div class="product-price">Rp{{ number_format($product->price) }}
+                                <div class="product-price">{{ number_format($product->price) }} Gold
                                 </div>
                             </div>
                         </div>
                     @endforeach
-                </div> --}}
+                </div>
             </div>
             {{-- end: Sidebar--}}
         </div>

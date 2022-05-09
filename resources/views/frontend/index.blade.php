@@ -68,7 +68,7 @@
                                 <div class="product">
                                     <div class="product-image">
                                         @foreach ($product->galleries as $gallery)
-                                            <a href="{{ Storage::url($gallery->url) }}" title="{{ $product->name }} product image"><img style="max-height: 400px;overflow: hidden;" alt="{{ $product->name }} product image" src="{{ Storage::url($gallery->url) }}">
+                                            <a href="{{ route('product', $product->slug ) }}" title="{{ $product->name }} product image"><img style="max-height: 400px;overflow: hidden;" alt="{{ $product->name }} product image" src="{{ Storage::url($gallery->url) }}">
                                             </a>
                                         @endforeach
                                         <div class="product-overlay">
@@ -76,8 +76,8 @@
                                         </div>
                                     </div>
                                     <div class="product-description">
-                                        <div class="product-category">{{ $product->category->name }}</div>
                                         <div class="product-category">{{ $product->job->name }}</div>
+                                        <div class="product-category">{{ $product->detail->name }}</div>
                                         <div class="product-category">{{ $product->type->name }}</div>
                                         <div class="product-title">
                                             <h3><a href="{{ route('product', $product->slug ) }}">{{ $product->name }}</a></h3>
@@ -86,7 +86,8 @@
                                             @if ($product->is_sold == false)
                                                 {{ number_format($product->price) }} Gold
                                             @else
-                                            <span class="badge badge-pill badge-danger">SOLD</span><strike>{{ number_format($product->price) }}</strike> Gold
+                                            <strike>{{ number_format($product->price) }}</strike> Gold <br>
+                                            <span class="badge badge-pill badge-danger">SOLD</span>
                                             @endif
                                         </div>
                                     </div>
@@ -121,15 +122,22 @@
                     @foreach ($latest_products as $product)
                         <div class="product">
                             <div class="product-image">
-                                <a href="{{ route('product', $product->slug) }}"><img src="#" alt="Shop product image!">
+                                {{-- @foreach ($product->galleries->take(1) as $gallery)
+                                <a href="{{ route('product', $product->slug) }}"><img src="{{ Storage::url($gallery->url) }}" alt="Shop product image!">
+                                </a>
+                                @endforeach --}}
+                                <a href="{{ route('product', $product->slug) }}"><img src="{{ $product->galleries()->exists() ? Storage::url($product->galleries->first()->url) : 'data:image/gif;base64,R0lGODlhAQABAIAAAMLCwgAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==' }}" alt="Shop product image!">
                                 </a>
                             </div>
                             <div class="product-description">
-                                <div class="product-category">{{ $product->category->name }}</div>
+                                <div class="product-category">{{ $product->job->name }}</div>
+                                <div class="product-category">{{ $product->type->name }}</div>
+                                <div class="product-category">{{ $product->detail->name }}</div><br>
                                 <div class="product-title">
+                                    <span class="badge badge-pill badge-success">NEW</span>
                                     <h3><a href="{{ route('product', $product->slug) }}">{{ $product->name }}</a></h3>
                                 </div>
-                                <div class="product-price">Rp{{ number_format($product->price) }}
+                                <div class="product-price">{{ number_format($product->price) }} Gold
                                 </div>
                             </div>
                         </div>
