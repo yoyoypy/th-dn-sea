@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Models\ClassJob;
 use App\Models\Product;
+use App\Models\ProductView;
 use Illuminate\Http\Request;
 
 class FrontendController extends Controller
@@ -12,6 +13,7 @@ class FrontendController extends Controller
     public function index()
     {
         $products = Product::with('galleries', 'user_product', 'detail', 'job', 'type', 'category')
+        ->withCount('view')
         ->latest()->paginate(20);
 
         $product_categories = Category::withCount('product')->get();
@@ -33,7 +35,7 @@ class FrontendController extends Controller
         $name       = request()->query('name');
         $detail       = request()->query('category_detail_id');
 
-        $query = Product::with('galleries', 'user_product', 'detail', 'job', 'type', 'category');
+        $query = Product::with('galleries', 'user_product', 'detail', 'job', 'type', 'category')->withCount('view');
 
         if($category){
             $query->where('category_id', $category);
@@ -64,8 +66,9 @@ class FrontendController extends Controller
         ]);
     }
 
-    public function product(Product $product)
+    public function product(Request $request, Product $product)
     {
+        ProductView::createViewLog($product, $request);
 
         $product_categories = Category::withCount('product')->get();
 
@@ -82,8 +85,11 @@ class FrontendController extends Controller
         ->take(3)
         ->get();
 
+        $product_log = ProductView::where('product_id', $product->id)->count();
+
         return view('frontend.detail', [
             'product' => $product,
+            'product_log' => $product_log,
             'recommendations' => $recommendations,
             'product_categories' => $product_categories,
             'latest_products'   => $latest_products

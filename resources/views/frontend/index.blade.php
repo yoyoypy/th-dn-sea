@@ -59,6 +59,7 @@
                                             <span class="badge badge-pill badge-danger">SOLD</span>
                                             @endif
                                         </div>
+                                        <div class="product-category"><i class="fa fa-eye fa-xs" aria-hidden="true"> {{ $product->view_count }}</i></div>
                                     </div>
                                 </div>
                             </div>

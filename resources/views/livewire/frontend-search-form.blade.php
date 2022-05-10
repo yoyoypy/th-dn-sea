@@ -12,6 +12,7 @@
                         @endforeach
                     </select>
                 </div><br>
+                @if (!is_null($selectedClass))
                 <div class="order-select">
                     <p>Category</p>
                     <select class="form-control" wire:model="selectedCategory" name="category_id" id="category_id">
@@ -22,6 +23,7 @@
                         @endforeach
                     </select>
                 </div>
+                @endif
             </div>
             <div class="col-lg-3">
                 @if (!is_null($classes))

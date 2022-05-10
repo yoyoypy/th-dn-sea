@@ -94,4 +94,14 @@ class Product extends Model
     {
         return $this->belongsTo(ClassJob::class, 'job_id', 'id');
     }
+
+    /**
+     * Get all of the view_count for the Product
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function view()
+    {
+        return $this->hasMany(ProductView::class, 'product_id', 'id');
+    }
 }
