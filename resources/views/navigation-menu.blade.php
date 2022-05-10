@@ -29,6 +29,9 @@
                     <x-jet-nav-link href="{{ route('dashboard.category-detail.index') }}" :active="request()->routeIs('dashboard.category-detail.index')">
                         {{ __('Category Detail') }}
                     </x-jet-nav-link>
+                    <x-jet-nav-link href="{{ route('dashboard.report.index') }}" :active="request()->routeIs('dashboard.report.index')">
+                        {{ __('Report') }}
+                    </x-jet-nav-link>
                     @endif
                 </div>
             </div>
@@ -157,17 +160,20 @@
             </x-jet-responsive-nav-link>
 
             @if (Auth::user()->roles == 'ADMIN')
-            <x-jet-responsive-nav-link href="{{ route('dashboard.class-job.index') }}" :active="request()->routeIs('dashboard.category.index')">
+            <x-jet-responsive-nav-link href="{{ route('dashboard.class-job.index') }}" :active="request()->routeIs('dashboard.class-job.index')">
                 {{ __('Class') }}
             </x-jet-responsive-nav-link>
             <x-jet-responsive-nav-link href="{{ route('dashboard.category.index') }}" :active="request()->routeIs('dashboard.category.index')">
                 {{ __('Category') }}
             </x-jet-responsive-nav-link>
-            <x-jet-responsive-nav-link href="{{ route('dashboard.category-type.index') }}" :active="request()->routeIs('dashboard.category.index')">
+            <x-jet-responsive-nav-link href="{{ route('dashboard.category-type.index') }}" :active="request()->routeIs('dashboard.category-type.index')">
                 {{ __('Category Type') }}
             </x-jet-responsive-nav-link>
-            <x-jet-responsive-nav-link href="{{ route('dashboard.category-detail.index') }}" :active="request()->routeIs('dashboard.category.index')">
+            <x-jet-responsive-nav-link href="{{ route('dashboard.category-detail.index') }}" :active="request()->routeIs('dashboard.category-detail.index')">
                 {{ __('Category Detail') }}
+            </x-jet-responsive-nav-link>
+            <x-jet-responsive-nav-link href="{{ route('dashboard.report.index') }}" :active="request()->routeIs('dashboard.report.index')">
+                {{ __('Report') }}
             </x-jet-responsive-nav-link>
             @endif
 
