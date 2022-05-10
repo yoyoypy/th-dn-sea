@@ -40,10 +40,12 @@
         </div>
 
         <div class="mt-6 text-gray-500">
-            Laravel Jetstream provides a beautiful, robust starting point for your next Laravel application. Laravel is designed
-            to help you build your application using a development environment that is simple, powerful, and enjoyable. We believe
-            you should love expressing your creativity through programming, so we have spent time carefully crafting the Laravel
-            ecosystem to be a breath of fresh air. We hope you love it.
+            Help yourself to sell your runes and etc !
+            <br>
+            <br>
+            <strong><u>DISCLAIMER</u></strong> <br>
+            We dont provide any transaction here, you must <strong><u>trade the buyer by yourself in game</u></strong>, and that makes <strong>we are NOT responsible</strong> to the transaction that happend in game. <br>
+            Just be careful of <strong>scammer / poser</strong>!
         </div>
     </div>
 
