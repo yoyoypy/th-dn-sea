@@ -31,11 +31,16 @@ class FrontendController extends Controller
         $category   = request()->query('category_id');
         $job        = request()->query('job_id');
         $name       = request()->query('name');
+        $detail       = request()->query('category_detail_id');
 
         $query = Product::with('galleries', 'user_product', 'detail', 'job', 'type', 'category');
 
         if($category){
             $query->where('category_id', $category);
+        }
+
+        if($detail){
+            $query->where('category_details_id', $detail);
         }
 
         if($job){

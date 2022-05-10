@@ -9,6 +9,9 @@
     {{-- Stylesheets & Fonts --}}
     <link href="{{ asset('frontend/css/plugins.css') }}" rel="stylesheet">
     <link href="{{ asset('frontend/css/style.css') }}" rel="stylesheet">
+    <script src="{{ mix('js/app.js') }}" defer></script>
+
+    @livewireStyles
 </head>
 
 <body data-icon="16">
@@ -32,9 +35,7 @@
     {{-- Template functions --}}
     <script src="{{ asset('frontend/js/functions.js') }}"></script>
 
-    {{-- Pageloader plugin files --}}
-    <script src="{{ asset('frontend/plugins/pageloader/pageloader.js') }}"></script>
-    <script src="{{ asset('frontend/plugins/pageloader/pageloader.init.js') }}"></script>
+    @livewireScripts
 </body>
 
 </html>
