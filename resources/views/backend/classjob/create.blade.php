@@ -30,7 +30,7 @@
                 <div class="flex flex-wrap -mx-4 mb-6">
                     {{-- input brand --}}
                     <div class="w-full px-3">
-                        <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">Category</label>
+                        <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">Base Class</label>
                         <select name="parent_id" id="parent_id" class="block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500">
                             <option value="">Select a Class</option>
                             <option value="" disabled>------------------</option>
@@ -44,7 +44,7 @@
                 <div class="flex flex-wrap -mx-4 mb-6">
                     {{-- input brand --}}
                     <div class="w-full px-3">
-                        <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">Category</label>
+                        <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">Class</label>
                         <input type="text" required value="{{ old('name') }}" name="name" placeholder="Input Category Here" class="block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500">
                     </div>
                     {{-- input brand --}}
