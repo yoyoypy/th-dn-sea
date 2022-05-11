@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('class_jobs', function (Blueprint $table) {
             $table->id();
-            $table->integer('parent_id')->nullable();
+            $table->integer('parent_id')->nullable()->reference('id')->on('class_jobs')->onDelete('cascade');
             $table->string('name');
             $table->timestamps();
         });
