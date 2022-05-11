@@ -88,6 +88,10 @@
                                             <td>Type</td>
                                             <td>{{ $product->type->name }}</td>
                                         </tr>
+                                        <tr>
+                                            <td>Value</td>
+                                            <td>{{ $product->value }}</td>
+                                        </tr>
                                     </tbody>
                                 </table>
                             </div>
