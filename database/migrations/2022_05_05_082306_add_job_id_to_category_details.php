@@ -14,7 +14,12 @@ return new class extends Migration
     public function up()
     {
         Schema::table('category_details', function (Blueprint $table) {
-            $table->integer('job_id')->nullable()->after('name');
+            $table->integer('job_id')
+            ->nullable()
+            ->after('name')
+            ->reference('id')
+            ->on('class_jobs')
+            ->onDelete('cascade');
         });
     }
 

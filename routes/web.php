@@ -8,6 +8,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\FrontendController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProductGalleryController;
+use App\Http\Controllers\ReportController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -56,6 +57,7 @@ Route::middleware(['auth:sanctum', 'verified'])->name('dashboard.')->prefix('das
         Route::resource('category-type', CategoryTypeController::class)->except([
             'show'
         ]);
+        Route::get('report', [ReportController::class, 'index'])->name('report.index');
         // Route::resource('inbox', ContactController::class)->only([
         //     'show', 'index'
         // ]);

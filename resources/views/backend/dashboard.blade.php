@@ -34,6 +34,21 @@
         </script>
     </x-slot>
 
+    <div class="p-6 sm:px-20 bg-white border border-gray-600">
+        <div class="mt-8 text-2xl">
+            Welcome to Offgame Trading House!
+        </div>
+
+        <div class="mt-6 text-gray-500">
+            Help yourself to sell your runes and etc !
+            <br>
+            <br>
+            <strong><u>DISCLAIMER</u></strong> <br>
+            We dont provide any transaction here, you must <strong><u>trade the buyer by yourself in game</u></strong>, and that makes <strong>we are NOT responsible</strong> to the transaction that happend in game. <br>
+            Just be careful of <strong>scammer / poser</strong>!
+        </div>
+    </div>
+
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="mb-10">

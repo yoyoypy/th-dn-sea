@@ -42,9 +42,10 @@
                                     </div><br>
                                 @endif
                                 <div class="product-category">Added {{ $product->created_at->diffForHumans() }}</div>
+                                <div class="product-category">Viewed {{ $product_log }} times</div>
                                 <div class="seperator m-b-10"></div>
                                     <div class="product-title">
-                                        <h2>Seller Info</h2>
+                                        <u><h2>Seller Info</h2></u>
                                         IGN : <h3>{{ $product->user_product->ign }}</h3><br>
                                         Discord ID : <h3>{{ $product->user_product->discord }}</h3>
                                     </div>

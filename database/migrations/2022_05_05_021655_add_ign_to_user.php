@@ -14,8 +14,8 @@ return new class extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->string('discord')->after('email');
-            $table->string('ign')->after('name');
+            $table->string('discord')->after('email')->unique();
+            $table->string('ign')->after('name')->unique();
         });
     }
 

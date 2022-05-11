@@ -15,7 +15,7 @@ return new class extends Migration
     public function up()
     {
         Schema::table('class_jobs', function (Blueprint $table) {
-            $table->string('slug')->nullable()->after('name');
+            $table->string('slug')->nullable()->after('name')->unique();
         });
     }
 

@@ -13,10 +13,14 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('class_jobs', function (Blueprint $table) {
+        Schema::create('product_views', function (Blueprint $table) {
             $table->id();
-            $table->integer('parent_id')->nullable()->reference('id')->on('class_jobs')->onDelete('cascade');
-            $table->string('name');
+            $table->bigInteger('product_id');
+            $table->string('url')->nullable();
+            $table->string('session_id')->nullable();
+            $table->string('ip')->nullable();
+            $table->string('agent')->nullable();
+
             $table->timestamps();
         });
     }
@@ -28,6 +32,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('class_jobs');
+        Schema::dropIfExists('product_views');
     }
 };
