@@ -25,7 +25,6 @@ class ClassRequest extends FormRequest
     public function rules()
     {
         return [
-            'parent_id' => 'exists:class_jobs,id',
             'name' => 'required',
             'slug' => 'unique:class_jobs,slug'
         ];

@@ -65,7 +65,7 @@ class ClassJobController extends Controller
      */
     public function store(ClassRequest $request)
     {
-        $data = $request->validated();
+        $data = $request->all();
         $data['slug'] = Str::slug($data['name']);
 
         ClassJob::create($data);
