@@ -48,7 +48,7 @@ class ProductController extends Controller
     public function store(ProductRequest $request)
     {
         $data = $request->validated();
-        $data['slug'] = Str::slug($data['name']);
+        $data['slug'] = Str::slug($data['name'] . '-' . Auth::user()->ign . '-' . Str::random(6));
         $data['user_id'] = Auth::user()->id;
 
         Product::create($data);
