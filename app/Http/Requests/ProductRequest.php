@@ -38,4 +38,11 @@ class ProductRequest extends FormRequest
             'value' => 'string'
         ];
     }
+
+    public function messages()
+    {
+        return [
+            'slug.unique' => 'Try another item name'
+        ];
+    }
 }

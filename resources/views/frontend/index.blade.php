@@ -32,7 +32,7 @@
                 {{--Product list--}}
                 <div class="shop">
                     <div class="grid-layout grid-3-columns" data-item="grid-item">
-                        @foreach ($products as $product)
+                        @forelse ($products as $product)
                             <div class="grid-item">
                                 <div class="product">
                                     <div class="product-image">
@@ -63,7 +63,13 @@
                                     </div>
                                 </div>
                             </div>
-                        @endforeach
+                            @empty
+                            <div class="grid-layout grid-1-columns" data-item="grid-item">
+                                <div class="grid-item">
+                                    <h1>No Items Found</h1>
+                                </div>
+                            </div>
+                        @endforelse
                     </div>
                     <hr>
                     {{-- Pagination --}}
