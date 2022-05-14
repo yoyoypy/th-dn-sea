@@ -12,6 +12,16 @@
     <script src="{{ mix('js/app.js') }}" defer></script>
 
     @livewireStyles
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZM91PR5H7B"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-ZM91PR5H7B');
+    </script>
 </head>
 
 <body data-icon="16">
