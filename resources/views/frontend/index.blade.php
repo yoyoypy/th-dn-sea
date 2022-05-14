@@ -37,7 +37,7 @@
                                 <div class="product">
                                     <div class="product-image">
                                         @foreach ($product->galleries as $gallery)
-                                            <a href="{{ route('product', $product->slug ) }}" title="{{ $product->name }} product image"><img style="max-height: 400px;overflow: hidden;" alt="{{ $product->name }} item image" src="{{ Storage::url($gallery->url) }} ?? data:image/gif;base64,R0lGODlhAQABAIAAAMLCwgAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==">
+                                            <a href="{{ route('product', $product->slug ) }}" title="{{ $product->name }} product image"><img style="max-height: 400px;overflow: hidden;" alt="{{ $product->name }} item image" src="{{ $gallery->exists() ? Storage::url($gallery->url) : 'data:image/gif;base64,R0lGODlhAQABAIAAAMLCwgAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==' }}">
                                             </a>
                                         @endforeach
                                         <div class="product-overlay">
