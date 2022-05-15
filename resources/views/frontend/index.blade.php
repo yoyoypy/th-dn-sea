@@ -88,7 +88,7 @@
                     <ul class="list list-lines">
                         @foreach ($product_categories as $category)
                             <li>
-                                <a href="{{ route('category', $category->slug) }}">{{ $category->name }}</a> <span class="count">({{ $category->product_count }})</span>
+                                <a href="#">{{ $category->name }}</a> <span class="count">({{ $category->product_count }})</span>
                             </li>
                         @endforeach
                     </ul>
