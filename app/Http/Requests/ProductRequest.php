@@ -34,8 +34,7 @@ class ProductRequest extends FormRequest
             'name' => 'required|string',
             'description' => 'required',
             'price' => 'required|integer',
-            'rc'    => 'required|integer',
-            'value' => 'string'
+            'rc'    => 'required|integer'
         ];
     }
 
