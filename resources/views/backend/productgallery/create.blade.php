@@ -32,7 +32,7 @@
                     <div class="w-full px-3">
                         <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">Photo</label>
                         <input type="file" name="files[]" multiple accept="image/*" placeholder="Input Photos Here" class="block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500">
-                        <small>max upload size 500kb</small>
+                        <small>max upload size 300kb</small>
                     </div>
                     {{-- input photo --}}
                 </div>

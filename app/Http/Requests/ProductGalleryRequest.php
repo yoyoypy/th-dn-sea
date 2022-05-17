@@ -26,7 +26,7 @@ class ProductGalleryRequest extends FormRequest
     {
         return [
             'product_id' => 'exists:products,id',
-            'files.*' => 'required|image|max:500'
+            'files.*' => 'required|image|max:300'
         ];
     }
 }
