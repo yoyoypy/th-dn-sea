@@ -19,10 +19,12 @@
                             <div class="product-image">
                                 {{-- Carousel slider --}}
                                 <div class="carousel dots-inside dots-dark arrows-visible" data-items="1" data-loop="true" data-autoplay="true" data-animate-in="fadeIn" data-animate-out="fadeOut" data-autoplay="2500" data-lightbox="gallery">
-                                    @foreach ($product->galleries as $gallery)
+                                    @forelse ($product->galleries as $gallery)
                                         <a href="{{ Storage::url($gallery->url) }}" data-lightbox="image" title="{{ $product->name }} product image"><img alt="{{ $product->name }} product image" src="{{ Storage::url($gallery->url) }}">
                                         </a>
-                                    @endforeach
+                                    @empty
+                                        <img src="data:image/gif;base64,R0lGODlhAQABAIAAAMLCwgAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="This Item Not Have Image">
+                                    @endforelse
                                 </div>
                                 {{-- Carousel slider --}}
                             </div>
