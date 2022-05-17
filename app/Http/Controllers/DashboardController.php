@@ -43,7 +43,7 @@ class DashboardController extends Controller
                         return '
                         <a class="inline-block border border-blue-700 bg-blue-700 text-white rounded-md px-2 py-1 m-1 transition duration-500 ease select-none hover:bg-blue-800 focus:outline-none focus:shadow-outline"
                             href="' . route('dashboard.product.gallery.index', $item->slug) . '">
-                            Gallery
+                            Item Photos
                         </a>
                         <a class="inline-block border border-gray-700 bg-gray-700 text-white rounded-md px-2 py-1 m-1 transition duration-500 ease select-none hover:bg-gray-800 focus:outline-none focus:shadow-outline"
                         href="' . route('dashboard.product.edit', $item->slug) . '">

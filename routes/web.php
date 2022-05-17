@@ -35,7 +35,7 @@ Route::get('/category/{category}', [FrontendController::class, 'category'])->nam
 //route login dashboard
 Route::middleware(['auth:sanctum', 'verified'])->name('dashboard.')->prefix('dashboard')->group(function (){
     Route::get('/', [DashboardController::class, 'index'])->name('index');
-    Route::resource('product', ProductController::class);
+    Route::resource('product', ProductController::class)->except('index');
     Route::resource('product.gallery', ProductGalleryController::class)->only([
         'index', 'create', 'store', 'destroy'
     ])->shallow();
@@ -57,6 +57,7 @@ Route::middleware(['auth:sanctum', 'verified'])->name('dashboard.')->prefix('das
         Route::resource('category-type', CategoryTypeController::class)->except([
             'show'
         ]);
+        Route::get('product', [ProductController::class, 'index'])->name('product.index');
         Route::get('report', [ReportController::class, 'index'])->name('report.index');
         // Route::resource('inbox', ContactController::class)->only([
         //     'show', 'index'

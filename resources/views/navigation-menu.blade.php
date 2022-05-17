@@ -17,6 +17,9 @@
                     </x-jet-nav-link>
 
                     @if (Auth::user()->roles == 'ADMIN')
+                    <x-jet-nav-link href="{{ route('dashboard.product.index') }}" :active="request()->routeIs('dashboard.product.index')">
+                        {{ __('Product') }}
+                    </x-jet-nav-link>
                     <x-jet-nav-link href="{{ route('dashboard.class-job.index') }}" :active="request()->routeIs('dashboard.class.index')">
                         {{ __('Class Jobs') }}
                     </x-jet-nav-link>
@@ -160,6 +163,9 @@
             </x-jet-responsive-nav-link>
 
             @if (Auth::user()->roles == 'ADMIN')
+            <x-jet-responsive-nav-link href="{{ route('dashboard.product.index') }}" :active="request()->routeIs('dashboard.product.index')">
+                {{ __('Product') }}
+            </x-jet-responsive-nav-link>
             <x-jet-responsive-nav-link href="{{ route('dashboard.class-job.index') }}" :active="request()->routeIs('dashboard.class-job.index')">
                 {{ __('Class') }}
             </x-jet-responsive-nav-link>
