@@ -98,7 +98,7 @@
             {{-- input price --}}
             <div class="w-3/12 px-3">
                 <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">Price (Gold)*</label>
-                <input type="number" value="{{ old('price') }}" name="price" placeholder="Input Item Price Here" class="block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500">
+                <input type="number" min="0" oninput="validity.valid||(value='');" value="{{ old('price') }}" name="price" placeholder="Input Item Price Here" class="block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500">
             </div>
             {{-- input price --}}
             {{-- input price --}}

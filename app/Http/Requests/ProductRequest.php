@@ -33,7 +33,7 @@ class ProductRequest extends FormRequest
             'job_id' => 'exists:class_jobs,id|required',
             'name' => 'required|string',
             'description' => 'required',
-            'price' => 'required|integer',
+            'price' => 'required|numeric|not_in:0|regex:/^[1-9][0-9]+/',
             'rc'    => 'required|integer'
         ];
     }
