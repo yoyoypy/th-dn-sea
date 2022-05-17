@@ -84,8 +84,8 @@ class FrontendController extends Controller
             ->get();
 
         $recommendations = Product::where('is_sold', false)
-        ->where('category_type_id', $product->category_type_id)
         ->where('job_id', $product->job_id)
+        ->where('id', '!=', $product->id)
         ->latest()
         ->take(3)
         ->get();
