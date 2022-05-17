@@ -33,12 +33,17 @@ class FrontendController extends Controller
         $category   = request()->query('category_id');
         $job        = request()->query('job_id');
         $name       = request()->query('name');
-        $detail       = request()->query('category_detail_id');
+        $detail     = request()->query('category_detail_id');
+        $type       = request()->query('category_type_id');
 
         $query = Product::with('galleries', 'user_product', 'detail', 'job', 'type', 'category')->withCount('view');
 
         if($category){
             $query->where('category_id', $category);
+        }
+
+        if($type){
+            $query->where('category_type_id', $type);
         }
 
         if($detail){
@@ -93,6 +98,31 @@ class FrontendController extends Controller
             'recommendations' => $recommendations,
             'product_categories' => $product_categories,
             'latest_products'   => $latest_products
+        ]);
+    }
+
+    public function category(Category $category)
+    {
+        $products = Product::with('galleries', 'user_product', 'detail', 'job', 'type', 'category')
+                        ->where('category_id', $category->id)
+                        ->withCount('view')
+                        ->latest()
+                        ->paginate(20);
+
+        $product_categories = Category::withCount('product')->get();
+        $classes = ClassJob::select('id', 'name')->whereNotNull('parent_id')->get();
+
+        $latest_products = Product::with('galleries', 'user_product', 'detail', 'job', 'type', 'category')
+                                ->where('is_sold', false)
+                                ->latest()
+                                ->take(5)
+                                ->get();
+
+        return view('frontend.index')->with([
+            'products' => $products,
+            'product_categories' => $product_categories,
+            'latest_products' => $latest_products,
+            'classes'   => $classes
         ]);
     }
 }

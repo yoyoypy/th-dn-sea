@@ -66,7 +66,7 @@
                             @empty
                             <div class="grid-layout grid-1-columns" data-item="grid-item">
                                 <div class="grid-item">
-                                    <h1>No Items Found</h1>
+                                    <h1>Sorry, No Items Found Yet</h1>
                                 </div>
                             </div>
                         @endforelse
@@ -88,7 +88,7 @@
                     <ul class="list list-lines">
                         @foreach ($product_categories as $category)
                             <li>
-                                <a href="#">{{ $category->name }}</a> <span class="count">({{ $category->product_count }}) Items</span>
+                                <a href="{{ route('category', $category->slug) }}">{{ $category->name }}</a> <span class="count">({{ $category->product_count }}) Items</span>
                             </li>
                         @endforeach
                     </ul>

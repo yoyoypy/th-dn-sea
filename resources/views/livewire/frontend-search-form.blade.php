@@ -1,6 +1,7 @@
 <div>
     <form action="{{ route('search') }}" method="GET">
-        <div class="row m-b-20">
+        <h4>Search Items</h4>
+        <div class="row m-b-20 border border-dark rounded" style="padding: 5px">
             <div class="col-lg-3">
                 <div class="order-select" wire:ignore>
                     <p>Base Class</p>
@@ -24,6 +25,19 @@
                     </select>
                 </div>
                 @endif
+                <br>
+                @if (!is_null($categoryDetail))
+                <div class="order-select">
+                    <p>Detail Item</p>
+                    <select class="form-control" name="category_detail_id" id="category_detail_id">
+                        <option value="">Select Item Detail</option>
+                        <option value="" disabled>--------------</option>
+                            @foreach ($categoryDetail as $detail)
+                                <option value="{{ $detail->id }}">{{ $detail->name }}</option>
+                            @endforeach
+                    </select>
+                </div>
+                @endif
             </div>
             <div class="col-lg-3">
                 @if (!is_null($classes))
@@ -39,14 +53,14 @@
                 </div>
                 @endif
                 <br>
-                @if (!is_null($categoryDetail))
+                @if (!is_null($categoryType))
                 <div class="order-select">
-                    <p>Detail Item</p>
-                    <select class="form-control" name="category_detail_id" id="category_detail_id">
-                        <option value="">Select Item Detail</option>
+                    <p>Type Item</p>
+                    <select class="form-control" name="category_type_id" id="category_type_id">
+                        <option value="">Select Item Type</option>
                         <option value="" disabled>--------------</option>
-                            @foreach ($categoryDetail as $detail)
-                                <option value="{{ $detail->id }}">{{ $detail->name }}</option>
+                            @foreach ($categoryType as $type)
+                                <option value="{{ $type->id }}">{{ $type->name }}</option>
                             @endforeach
                     </select>
                 </div>

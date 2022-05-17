@@ -23,8 +23,8 @@ class CreateNewUser implements CreatesNewUsers
         Validator::make($input, [
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'ign' => ['required', 'string', 'unique:users'],
-            'discord' => ['required', 'string', 'regex:/^.{3,32}#[0-9]{4}$/'],
+            'ign' => ['required', 'string', 'unique:users,ign'],
+            'discord' => ['required', 'string', 'regex:/^.{3,32}#[0-9]{4}$/', 'unique:users,discord'],
             'password' => $this->passwordRules(),
             'terms' => Jetstream::hasTermsAndPrivacyPolicyFeature() ? ['accepted', 'required'] : '',
         ])->validate();

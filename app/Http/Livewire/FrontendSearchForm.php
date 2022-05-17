@@ -5,6 +5,7 @@ namespace App\Http\Livewire;
 use Livewire\Component;
 use App\Models\Category;
 use App\Models\CategoryDetail;
+use App\Models\CategoryType;
 use App\Models\ClassJob;
 
 class FrontendSearchForm extends Component
@@ -13,6 +14,7 @@ class FrontendSearchForm extends Component
     public $selectedClass = null;
     public $selectedCategory = null;
     public $categoryDetail = null;
+    public $categoryType = null;
     public $classes = null;
     public $job_id;
 
@@ -38,5 +40,8 @@ class FrontendSearchForm extends Component
     public function updatedSelectedCategory($category_id)
     {
         $this->categoryDetail = CategoryDetail::where('category_id', $category_id)->where('job_id', $this->job_id)->select('id', 'name')->get();
+        $this->categoryType = CategoryType::where('category_id', $category_id)->select('id', 'name')->get();
+
+        $this->categoryId = $category_id;
     }
 }
