@@ -99,6 +99,7 @@
                     </div>
                     {{-- end: Product additional tabs --}}
                 </div>
+                @if ($recommendations->count() >= 1)
                 <div class="heading-text heading-line text-center">
                     <h4>You may be also search for this item!</h4>
                 </div>
@@ -126,6 +127,7 @@
                     </div>
                     @endforeach
                 </div>
+                @endif
             </div>
             {{-- end: Content--}}
             {{-- Sidebar--}}
