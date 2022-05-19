@@ -32,8 +32,10 @@
                         <div class="col-lg-7">
                             <div class="product-description">
                                 <div class="product-category">{{ $product->category->name }}</div>
+                                <div class="product-category">{{ $product->detail->name }}</div>
+                                <div class="product-category">{{ $product->type->name }}</div>
                                 <div class="product-title">
-                                    <h3><a href="{{ Route('product', $product->slug) }}">{{ $product->name }}</a></h3>
+                                    <h3 style="margin-right: 20px"><a href="{{ Route('product', $product->slug) }}">{{ $product->name }}</a></h3>
                                 </div>
                                 @if ($product->is_sold == false)
                                     <div class="product-price"><ins>{{ number_format($product->price) }} Gold</ins>
