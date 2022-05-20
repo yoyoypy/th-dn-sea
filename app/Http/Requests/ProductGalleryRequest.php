@@ -29,4 +29,11 @@ class ProductGalleryRequest extends FormRequest
             'files.*' => 'required|image|max:300'
         ];
     }
+
+    public function messages()
+    {
+        return [
+            'files.max' => 'Each image cannot be greater than 300Kb'
+        ];
+    }
 }
