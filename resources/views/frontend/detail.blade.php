@@ -103,6 +103,65 @@
                     </div>
                     {{-- end: Product additional tabs --}}
                 </div>
+
+                @if ($product->is_bid == true)
+                    <div class="content col-lg-12 border rounded" style="padding-block: 1em">
+                        <div class="comments" id="comments">
+                            <div class="comment_number">
+                                Latest <span>Bid</span>
+                            </div>
+                            <div class="comment-list">
+                                @forelse ($bids as $bid)
+                                <!-- Comment -->
+                                    <div class="comment border rounded" style="padding-block: 1em; margin: 3px">
+                                        <div class="image"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAMLCwgAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="This Item Not Have Image"></div>
+                                        <div class="text">
+                                            <h5 class="name">{{ $bid->user->ign }}</h5>
+                                            <span>{{ $bid->user->discord }}</span>
+                                            <div class="text_holder" style="font-size: 2em">
+                                                <strong>{{ number_format($bid->bid_price) }} Gold</strong>
+                                            </div>
+                                            <span class="comment_date">Bid at {{ $bid->created_at->diffForHumans() }}</span>
+                                        </div>
+                                    </div>
+                                <!-- end: Comment -->
+                                @empty
+                                    <strong>No Bid Yet</strong>
+                                @endforelse
+                            </div>
+                        </div>
+                        <!-- end: Comments -->
+                        @auth
+                            <div class="respond-form" id="respond">
+                                <div class="respond-comment">
+                                    Leave a <span>Bid</span></div>
+                                <form class="form-gray-fields" action="{{ route('place-bid', $product->slug ) }}" method="POST" enctype="multipart/form-data">
+                                    @csrf
+                                    <div class="row">
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label class="upper" for="name">Bid Price</label>
+                                                <input class="form-control required" name="bid" placeholder="Enter Your Bid" id="bid" aria-required="true" type="number">
+                                            </div>
+                                            @if ($errors->any())
+                                                <strong>Error !</strong>
+                                                <ul>
+                                                    @foreach ($errors->all() as $error)
+                                                        <li>{{ $error }}</li>
+                                                    @endforeach
+                                                </ul>
+                                            @endif
+                                            <div class="form-group text-left">
+                                                <button class="btn btn-primary" type="submit">Submit Bid</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        @endauth
+                    </div>
+                @endif
+
                 @if ($recommendations->count() >= 1)
                 <div class="heading-text heading-line text-center">
                     <h4>You may be also search for this item!</h4>

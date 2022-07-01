@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\BidRequest;
+use App\Models\Bidding;
 use App\Models\Category;
 use App\Models\ClassJob;
 use App\Models\Product;
@@ -13,18 +15,19 @@ class FrontendController extends Controller
     public function index()
     {
         $products = Product::with('galleries', 'user_product', 'detail', 'job', 'type', 'category')
-        ->withCount('view')
-        ->latest()->paginate(20);
+                    ->withCount('view')
+                    ->latest()
+                    ->paginate(20);
 
-        $product_categories = Category::withCount('product')->get();
-        $classes = ClassJob::select('id', 'name')->whereNotNull('parent_id')->get();
-        $latest_products = Product::with('galleries', 'user_product', 'detail', 'job', 'type', 'category')->where('is_sold', false)->latest()->take(5)->get();
+        $product_categories     = Category::withCount('product')->get();
+        $classes                = ClassJob::select('id', 'name')->whereNotNull('parent_id')->get();
+        $latest_products        = Product::with('galleries', 'user_product', 'detail', 'job', 'type', 'category')->where('is_sold', false)->latest()->take(5)->get();
 
         return view('frontend.index')->with([
-            'products' => $products,
-            'product_categories' => $product_categories,
-            'latest_products' => $latest_products,
-            'classes'   => $classes
+            'products'              => $products,
+            'product_categories'    => $product_categories,
+            'latest_products'       => $latest_products,
+            'classes'               => $classes
         ]);
     }
 
@@ -64,10 +67,10 @@ class FrontendController extends Controller
         $latest_products = Product::with('galleries', 'user_product', 'detail', 'job', 'type', 'category')->where('is_sold', false)->latest()->take(5)->get();
 
         return view('frontend.index')->with([
-            'products' => $products,
-            'product_categories' => $product_categories,
-            'latest_products' => $latest_products,
-            'classes'   => $classes
+            'products'              => $products,
+            'product_categories'    => $product_categories,
+            'latest_products'       => $latest_products,
+            'classes'               => $classes
         ]);
     }
 
@@ -90,14 +93,17 @@ class FrontendController extends Controller
         ->take(3)
         ->get();
 
+        $bids = Bidding::where('product_id', $product->id)->orderBy('bid_price', 'DESC')->with('user')->take(5)->get();
+
         $product_log = ProductView::where('product_id', $product->id)->count();
 
         return view('frontend.detail', [
-            'product' => $product,
-            'product_log' => $product_log,
-            'recommendations' => $recommendations,
-            'product_categories' => $product_categories,
-            'latest_products'   => $latest_products
+            'product'               => $product,
+            'product_log'           => $product_log,
+            'recommendations'       => $recommendations,
+            'product_categories'    => $product_categories,
+            'bids'                  => $bids,
+            'latest_products'       => $latest_products
         ]);
     }
 
@@ -119,10 +125,23 @@ class FrontendController extends Controller
                                 ->get();
 
         return view('frontend.index')->with([
-            'products' => $products,
-            'product_categories' => $product_categories,
-            'latest_products' => $latest_products,
-            'classes'   => $classes
+            'products'              => $products,
+            'product_categories'    => $product_categories,
+            'latest_products'       => $latest_products,
+            'classes'               => $classes
         ]);
+    }
+
+    public function place_bid(BidRequest $request, Product $product)
+    {
+        $data = $request->validated();
+
+        Bidding::create([
+            'product_id'    => $product->id,
+            'user_id'       => auth()->user()->id,
+            'bid_price'     => $data['bid']
+        ]);
+
+        return redirect()->back();
     }
 }

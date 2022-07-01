@@ -49,6 +49,10 @@ class DashboardController extends Controller
                         href="' . route('dashboard.product.edit', $item->slug) . '">
                             Edit
                         </a>
+                        <a class="inline-block border border-yellow-700 bg-yellow-700 text-white rounded-md px-2 py-1 m-1 transition duration-500 ease select-none hover:bg-yellow-800 focus:outline-none focus:shadow-outline"
+                        href="' . route('dashboard.product.bid.index', $item->slug) . '">
+                            See Bid
+                        </a>
                         <form class="inline-block" action="' . route('dashboard.mark-sold', $item->slug) . '" method="POST">
                         <button class="border border-red-500 bg-red-500 text-white rounded-md px-2 py-1 m-2 transition duration-500 ease select-none hover:bg-red-600 focus:outline-none focus:shadow-outline" >
                             Mark Sold

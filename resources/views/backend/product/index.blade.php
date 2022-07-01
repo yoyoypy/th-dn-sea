@@ -30,6 +30,7 @@
                         width: '20%'
                     },
                 ],
+                order: [[1, "DESC"]]
             });
         </script>
     </x-slot>

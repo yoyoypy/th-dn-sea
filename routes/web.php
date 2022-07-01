@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BiddingController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CategoryDetailController;
 use App\Http\Controllers\CategoryTypeController;
@@ -29,6 +30,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [FrontendController::class, 'index'])->name('home');
 Route::get('/search', [FrontendController::class, 'search'])->name('search');
 Route::get('/product/{product}', [FrontendController::class, 'product'])->name('product');
+Route::post('/product/{product}/place-bid', [FrontendController::class, 'place_bid'])->name('place-bid');
 Route::get('/category/{category}', [FrontendController::class, 'category'])->name('category');
 
 
@@ -38,6 +40,9 @@ Route::middleware(['auth:sanctum', 'verified'])->name('dashboard.')->prefix('das
     Route::resource('product', ProductController::class)->except('index');
     Route::resource('product.gallery', ProductGalleryController::class)->only([
         'index', 'create', 'store', 'destroy'
+    ])->shallow();
+    Route::resource('product.bid', BiddingController::class)->only([
+        'index'
     ])->shallow();
     Route::post('product/mark-sold/{product}', [ProductController::class, 'mark_sold'])->name('mark-sold');
 
