@@ -2,13 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\BidRequest;
+use App\Models\User;
 use App\Models\Bidding;
+use App\Models\Product;
 use App\Models\Category;
 use App\Models\ClassJob;
-use App\Models\Product;
 use App\Models\ProductView;
 use Illuminate\Http\Request;
+use App\Http\Requests\BidRequest;
+use App\Mail\NewBid;
+use Illuminate\Support\Facades\Mail;
 
 class FrontendController extends Controller
 {
@@ -141,6 +144,12 @@ class FrontendController extends Controller
             'user_id'       => auth()->user()->id,
             'bid_price'     => $data['bid']
         ]);
+
+        $seller = User::where('id', $product->user_id)->first();
+
+        if(!empty($seller->email_verified_at)) {
+            Mail::to($seller->email)->queue(new NewBid($product));
+        }
 
         return redirect()->back();
     }
