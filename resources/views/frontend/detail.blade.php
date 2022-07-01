@@ -132,32 +132,34 @@
                         </div>
                         <!-- end: Comments -->
                         @auth
-                            <div class="respond-form" id="respond">
-                                <div class="respond-comment">
-                                    Leave a <span>Bid</span></div>
-                                <form class="form-gray-fields" action="{{ route('place-bid', $product->slug ) }}" method="POST" enctype="multipart/form-data">
-                                    @csrf
-                                    <div class="row">
-                                        <div class="col-lg-6">
-                                            <div class="form-group">
-                                                <label class="upper" for="name">Bid Price</label>
-                                                <input class="form-control required" name="bid" placeholder="Enter Your Bid" id="bid" aria-required="true" type="number">
-                                            </div>
-                                            @if ($errors->any())
-                                                <strong>Error !</strong>
-                                                <ul>
-                                                    @foreach ($errors->all() as $error)
-                                                        <li>{{ $error }}</li>
-                                                    @endforeach
-                                                </ul>
-                                            @endif
-                                            <div class="form-group text-left">
-                                                <button class="btn btn-primary" type="submit">Submit Bid</button>
+                            @if ($product->is_sold == false)
+                                <div class="respond-form" id="respond">
+                                    <div class="respond-comment">
+                                        Leave a <span>Bid</span></div>
+                                    <form class="form-gray-fields" action="{{ route('place-bid', $product->slug ) }}" method="POST" enctype="multipart/form-data">
+                                        @csrf
+                                        <div class="row">
+                                            <div class="col-lg-6">
+                                                <div class="form-group">
+                                                    <label class="upper" for="name">Bid Price</label>
+                                                    <input class="form-control required" name="bid" placeholder="Enter Your Bid" id="bid" aria-required="true" type="number">
+                                                </div>
+                                                @if ($errors->any())
+                                                    <strong>Error !</strong>
+                                                    <ul>
+                                                        @foreach ($errors->all() as $error)
+                                                            <li>{{ $error }}</li>
+                                                        @endforeach
+                                                    </ul>
+                                                @endif
+                                                <div class="form-group text-left">
+                                                    <button class="btn btn-primary" type="submit">Submit Bid</button>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                </form>
-                            </div>
+                                    </form>
+                                </div>
+                            @endif
                         @endauth
                     </div>
                 @endif
