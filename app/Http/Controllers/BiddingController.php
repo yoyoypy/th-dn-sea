@@ -29,7 +29,7 @@ class BiddingController extends Controller
 
             return DataTables::of($query)
             ->editColumn('user_id', function($item){
-                return $item->user->name;
+                return $item->user->ign;
             })
             ->addColumn('discord', function($item){
                 return $item->user->discord;
