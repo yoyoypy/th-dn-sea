@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "836fca9492bc451cfa8e1c1a44e72e8d",
+    "content-hash": "e90463f1bb4f5f10ff31e8cb7618dd8a",
     "packages": [
         {
             "name": "bacon/bacon-qr-code",
@@ -469,6 +469,53 @@
                 }
             ],
             "time": "2022-01-18T15:43:28+00:00"
+        },
+        {
+            "name": "dscmall/laravel-filesystem-obs",
+            "version": "v3.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/dscmall/laravel-filesystem-obs.git",
+                "reference": "44caba5abd1435248590e9eeb9fc7a1b7506a8f2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/dscmall/laravel-filesystem-obs/zipball/44caba5abd1435248590e9eeb9fc7a1b7506a8f2",
+                "reference": "44caba5abd1435248590e9eeb9fc7a1b7506a8f2",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^8.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Obs\\ObsServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Obs\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "huawei cloud obs filesystem storage for laravel 5+",
+            "keywords": [
+                "OBS",
+                "filesystems",
+                "huawei",
+                "laravel",
+                "storage"
+            ],
+            "support": {
+                "source": "https://github.com/dscmall/laravel-filesystem-obs/tree/v3.2.0"
+            },
+            "time": "2021-04-07T05:11:32+00:00"
         },
         {
             "name": "egulias/email-validator",
@@ -8440,5 +8487,5 @@
         "php": "^8.0.2"
     },
     "platform-dev": [],
-    "plugin-api-version": "2.1.0"
+    "plugin-api-version": "2.3.0"
 }
